@@ -142,13 +142,13 @@ section { position: relative; z-index: 1; }
 
 /* ============ NAV ============ */
 .nav {
-  padding: 22px 0;
+  padding: 28px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .brand-logo { display: inline-flex; align-items: center; }
-.brand-logo img { height: 44px; width: auto; display: block; }
+.brand-logo img { height: 68px; width: auto; display: block; }
 .brand-logo.footer img { height: 72px; }
 .brand {
   display: flex;
@@ -866,6 +866,7 @@ section { position: relative; z-index: 1; }
 @media (max-width: 480px) {
   .container { padding: 0 18px; }
   .nav-meta { display: none; }
+  .brand-logo img { height: 48px; }
   .cd-units { gap: 8px; }
   .cd-unit { min-width: 56px; padding: 10px 8px; }
   .cd-unit .n { font-size: 22px; }
