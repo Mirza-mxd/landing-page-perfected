@@ -573,6 +573,7 @@ section { position: relative; z-index: 1; }
   transform: scaleY(-1) rotate(-15deg);
 }
 .hand-arrow.right {
+  top: -90px;
   left: auto;
   right: -120px;
   transform: scaleX(-1);
@@ -590,6 +591,7 @@ section { position: relative; z-index: 1; }
   pointer-events: none;
 }
 .hand-note.right {
+  top: -76px;
   left: auto;
   right: -190px;
   transform: rotate(8deg);
