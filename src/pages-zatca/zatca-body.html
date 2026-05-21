@@ -159,9 +159,11 @@
           <input type="email" id="email" name="email" placeholder="mohammed@company.com" required>
         </div>
         <div class="field">
-          <label for="phone">WhatsApp / Phone <span class="opt">optional</span></label>
-          <input type="tel" id="phone" name="phone" placeholder="+966 5XX XXX XXX">
+          <label for="phone">WhatsApp / Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="+966 5XX XXX XXX" required>
+          <p class="field-error" id="phone-error" hidden>Phone number is required to receive the checklist.</p>
         </div>
+
 
         <button type="submit" class="btn-primary">
           Download the Checklist
