@@ -42,34 +42,15 @@
    (step 3 in your funnel) for the call-booking flow.
    ============================================================ */
 async function submitForm(form) {
+  const countryCode = form.querySelector('[name="country_code"]').value;
+  const phoneDigits = form.querySelector('[name="phone"]').value.replace(/\D/g, '');
   const data = {
     name:  form.querySelector('[name="name"]').value.trim(),
     email: form.querySelector('[name="email"]').value.trim(),
-    phone: form.querySelector('[name="phone"]').value.trim(),
+    phone: countryCode + phoneDigits,
     source: 'zatca-phase-2-checklist-landing',
     timestamp: new Date().toISOString()
   };
-
-  const phoneError = document.getElementById('phone-error');
-  const phoneInput = form.querySelector('[name="phone"]');
-
-  if (!data.name || !data.email) {
-    alert('Please enter your full name and email so we can send the checklist.');
-    return;
-  }
-
-  if (!data.phone) {
-    if (phoneError) phoneError.hidden = false;
-    if (phoneInput) {
-      phoneInput.setAttribute('aria-invalid', 'true');
-      phoneInput.focus();
-    }
-    return;
-  }
-
-  if (phoneError) phoneError.hidden = true;
-  if (phoneInput) phoneInput.removeAttribute('aria-invalid');
-
 
   /* ---- WIRE YOUR BACKEND HERE ----
   await fetch('https://your-webhook-url.com/leads', {
@@ -87,8 +68,73 @@ async function submitForm(form) {
 
 document.getElementById('leadForm').addEventListener('submit', function (e) {
   e.preventDefault();
+  if (!validateAll(true)) return;
   submitForm(this);
 });
+
+/* ============================================================
+   2b. LIVE VALIDATION
+   ============================================================ */
+const nameInput  = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const submitBtn  = document.getElementById('submitBtn');
+const nameError  = document.getElementById('name-error');
+const emailError = document.getElementById('email-error');
+const phoneError = document.getElementById('phone-error');
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function isNameValid()  { return nameInput.value.trim().length >= 2; }
+function isEmailValid() { return EMAIL_RE.test(emailInput.value.trim()); }
+function isPhoneValid() {
+  const d = phoneInput.value.replace(/\D/g, '');
+  return d.length >= 7 && d.length <= 12;
+}
+
+function setError(input, errEl, show, message) {
+  if (show) {
+    errEl.hidden = false;
+    if (message) errEl.textContent = message;
+    input.setAttribute('aria-invalid', 'true');
+  } else {
+    errEl.hidden = true;
+    input.removeAttribute('aria-invalid');
+  }
+}
+
+function updateSubmitState() {
+  submitBtn.disabled = !(isNameValid() && isEmailValid() && isPhoneValid());
+}
+
+function validateAll(force) {
+  const nOk = isNameValid(), eOk = isEmailValid(), pOk = isPhoneValid();
+  if (force || nameInput.dataset.touched)  setError(nameInput,  nameError,  !nOk);
+  if (force || emailInput.dataset.touched) setError(emailInput, emailError, !eOk);
+  if (force || phoneInput.dataset.touched) setError(phoneInput, phoneError, !pOk);
+  updateSubmitState();
+  return nOk && eOk && pOk;
+}
+
+// Strip non-digits from phone as user types
+phoneInput.addEventListener('input', function () {
+  const cleaned = this.value.replace(/\D/g, '');
+  if (cleaned !== this.value) this.value = cleaned;
+});
+
+[nameInput, emailInput, phoneInput].forEach(function (inp) {
+  inp.addEventListener('input', function () {
+    if (inp.dataset.touched) validateAll(false);
+    updateSubmitState();
+  });
+  inp.addEventListener('blur', function () {
+    inp.dataset.touched = '1';
+    validateAll(false);
+  });
+});
+
+updateSubmitState();
+
 
 /* ============================================================
    3. SMOOTH SCROLL TO FORM FOR ALL CTAs

@@ -153,22 +153,35 @@
         <div class="field">
           <label for="name">Full name</label>
           <input type="text" id="name" name="name" placeholder="Mohammed Al-Saud" required>
+          <p class="field-error" id="name-error" hidden>Please enter your name.</p>
         </div>
         <div class="field">
           <label for="email">Work email</label>
           <input type="email" id="email" name="email" placeholder="mohammed@company.com" required>
+          <p class="field-error" id="email-error" hidden>Please enter a valid email address.</p>
         </div>
         <div class="field">
           <label for="phone">WhatsApp / Phone</label>
-          <input type="tel" id="phone" name="phone" placeholder="+966 5XX XXX XXX" required>
-          <p class="field-error" id="phone-error" hidden>Phone number is required to receive the checklist.</p>
+          <div class="phone-group">
+            <select id="country-code" name="country_code" class="country-select" aria-label="Country code">
+              <option value="+966" data-flag="🇸🇦" selected>🇸🇦 +966</option>
+              <option value="+971" data-flag="🇦🇪">🇦🇪 +971</option>
+              <option value="+974" data-flag="🇶🇦">🇶🇦 +974</option>
+              <option value="+965" data-flag="🇰🇼">🇰🇼 +965</option>
+              <option value="+973" data-flag="🇧🇭">🇧🇭 +973</option>
+              <option value="+968" data-flag="🇴🇲">🇴🇲 +968</option>
+            </select>
+            <input type="tel" id="phone" name="phone" placeholder="5XX XXX XXX" inputmode="numeric" required>
+          </div>
+          <p class="field-error" id="phone-error" hidden>Please enter a valid phone number.</p>
         </div>
 
 
-        <button type="submit" class="btn-primary">
+        <button type="submit" id="submitBtn" class="btn-primary" disabled>
           Download the Checklist
           <span class="arrow">↓</span>
         </button>
+
       </form>
 
       <div class="trust-line">
