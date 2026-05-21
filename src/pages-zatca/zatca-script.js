@@ -67,6 +67,11 @@ async function submitForm(form) {
   setTimeout(function () {
     triggerDownload('/zatca-checklist-ar.pdf', 'zatca-checklist-ar.pdf');
   }, 300);
+
+  /* Redirect to thank-you page ~1s after downloads start */
+  setTimeout(function () {
+    window.location.href = '/thank-you';
+  }, 1000);
 }
 
 function triggerDownload(url, filename) {
