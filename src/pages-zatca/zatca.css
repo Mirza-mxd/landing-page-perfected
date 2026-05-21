@@ -566,10 +566,11 @@ section { position: relative; z-index: 1; }
 .hand-arrow {
   position: absolute;
   top: 70px;
-  left: -40px;
+  left: -190px;
   width: 130px;
   color: var(--green-bright);
   pointer-events: none;
+  transform: scaleY(-1) rotate(-15deg);
 }
 .hand-arrow.right {
   left: auto;
@@ -578,8 +579,8 @@ section { position: relative; z-index: 1; }
 }
 .hand-note {
   position: absolute;
-  top: 42px;
-  left: -70px;
+  top: 92px;
+  left: -240px;
   font-family: var(--hand);
   font-weight: 700;
   font-size: 26px;
