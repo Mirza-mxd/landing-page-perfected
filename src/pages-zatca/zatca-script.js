@@ -74,3 +74,43 @@ document.getElementById('leadForm').addEventListener('submit', function (e) {
   submitForm(this);
 });
 
+/* ============================================================
+   3. SMOOTH SCROLL TO FORM FOR ALL CTAs
+   ============================================================ */
+(function () {
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function smoothScrollToCenter(target, duration) {
+    const rect = target.getBoundingClientRect();
+    const targetCenter = rect.top + window.pageYOffset + rect.height / 2;
+    const destination = targetCenter - window.innerHeight / 2;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const end = Math.max(0, Math.min(destination, maxScroll));
+    const start = window.pageYOffset;
+    const distance = end - start;
+    const startTime = performance.now();
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const t = Math.min(1, elapsed / duration);
+      window.scrollTo(0, start + distance * easeInOutCubic(t));
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  document.querySelectorAll('a[href="#download-form"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      const nameField = document.getElementById('name');
+      const target = nameField || document.getElementById('download-form');
+      if (!target) return;
+      e.preventDefault();
+      smoothScrollToCenter(target, 700);
+      history.replaceState(null, '', '#download-form');
+    });
+  });
+})();
+
+
