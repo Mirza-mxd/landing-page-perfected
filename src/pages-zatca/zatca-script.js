@@ -73,5 +73,4 @@ document.getElementById('leadForm').addEventListener('submit', function (e) {
   e.preventDefault();
   submitForm(this);
 });
-</script>
 
