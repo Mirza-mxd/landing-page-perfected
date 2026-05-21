@@ -516,7 +516,8 @@ section { position: relative; z-index: 1; }
   color: #36ABDB;
   margin: 0 auto 14px;
   position: relative;
-  display: inline-block;
+  display: block;
+  text-align: center;
   background: linear-gradient(180deg, #6FCDED 0%, #36ABDB 60%, rgba(54, 171, 219, 0.4) 100%);
   -webkit-background-clip: text;
   background-clip: text;
