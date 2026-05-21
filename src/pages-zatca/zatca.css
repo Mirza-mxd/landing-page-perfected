@@ -866,6 +866,7 @@ section { position: relative; z-index: 1; }
 @media (max-width: 480px) {
   .container { padding: 0 18px; }
   .nav-meta { display: none; }
+  .brand-logo img { height: 48px; }
   .cd-units { gap: 8px; }
   .cd-unit { min-width: 56px; padding: 10px 8px; }
   .cd-unit .n { font-size: 22px; }
