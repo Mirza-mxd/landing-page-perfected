@@ -513,11 +513,11 @@ section { position: relative; z-index: 1; }
   font-size: clamp(120px, 18vw, 200px);
   line-height: 0.85;
   letter-spacing: -0.05em;
-  color: var(--green-bright);
+  color: #36ABDB;
   margin: 0 auto 14px;
   position: relative;
   display: inline-block;
-  background: linear-gradient(180deg, var(--green-bright) 0%, var(--green) 60%, rgba(21, 184, 92, 0.4) 100%);
+  background: linear-gradient(180deg, #6FCDED 0%, #36ABDB 60%, rgba(54, 171, 219, 0.4) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
