@@ -50,10 +50,26 @@ async function submitForm(form) {
     timestamp: new Date().toISOString()
   };
 
+  const phoneError = document.getElementById('phone-error');
+  const phoneInput = form.querySelector('[name="phone"]');
+
   if (!data.name || !data.email) {
     alert('Please enter your full name and email so we can send the checklist.');
     return;
   }
+
+  if (!data.phone) {
+    if (phoneError) phoneError.hidden = false;
+    if (phoneInput) {
+      phoneInput.setAttribute('aria-invalid', 'true');
+      phoneInput.focus();
+    }
+    return;
+  }
+
+  if (phoneError) phoneError.hidden = true;
+  if (phoneInput) phoneInput.removeAttribute('aria-invalid');
+
 
   /* ---- WIRE YOUR BACKEND HERE ----
   await fetch('https://your-webhook-url.com/leads', {
