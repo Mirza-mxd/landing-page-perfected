@@ -561,11 +561,12 @@ section { position: relative; z-index: 1; }
   position: relative;
   display: inline-block;
   margin-top: 60px;
+  margin-bottom: 140px;
 }
 .hand-arrow {
   position: absolute;
-  top: -90px;
-  left: -120px;
+  top: 70px;
+  left: -40px;
   width: 130px;
   color: var(--green-bright);
   pointer-events: none;
@@ -577,8 +578,8 @@ section { position: relative; z-index: 1; }
 }
 .hand-note {
   position: absolute;
-  top: -76px;
-  left: -180px;
+  top: 42px;
+  left: -70px;
   font-family: var(--hand);
   font-weight: 700;
   font-size: 26px;
