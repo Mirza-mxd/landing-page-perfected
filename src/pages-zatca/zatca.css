@@ -642,6 +642,15 @@ section { position: relative; z-index: 1; }
   margin-left: 6px;
   font-size: 10px;
 }
+.field-error {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin: 7px 0 0;
+  font-weight: 500;
+}
+.field input[aria-invalid="true"] {
+  border-color: #ff6b6b;
+}
 .field input {
   width: 100%;
   background: rgba(9, 20, 40, 0.6);
