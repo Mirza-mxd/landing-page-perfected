@@ -675,6 +675,42 @@ section { position: relative; z-index: 1; }
   justify-content: center;
   margin-top: 8px;
 }
+.form-card .btn-primary:disabled,
+.form-card .btn-primary[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: auto;
+  filter: grayscale(0.3);
+}
+
+.phone-group {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+.phone-group .country-select {
+  flex: 0 0 auto;
+  background: rgba(9, 20, 40, 0.6);
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 13px 12px;
+  font-size: 15px;
+  font-family: var(--body);
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.phone-group .country-select:focus {
+  border-color: var(--green);
+  background: rgba(9, 20, 40, 0.8);
+  box-shadow: 0 0 0 3px rgba(21, 184, 92, 0.18);
+}
+.phone-group input[type="tel"] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 
 .trust-line {
   display: flex;
