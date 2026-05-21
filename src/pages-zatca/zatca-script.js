@@ -62,8 +62,21 @@ async function submitForm(form) {
 
   console.log('Lead captured (replace with backend call):', data);
 
-  /* Redirect to thank-you / book-a-call page (step 3 in your funnel). */
-  window.location.href = '/thank-you';
+  /* Trigger download of both PDF checklists */
+  triggerDownload('/zatca-checklist-en.pdf', 'zatca-checklist-en.pdf');
+  setTimeout(function () {
+    triggerDownload('/zatca-checklist-ar.pdf', 'zatca-checklist-ar.pdf');
+  }, 300);
+}
+
+function triggerDownload(url, filename) {
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
 document.getElementById('leadForm').addEventListener('submit', function (e) {
