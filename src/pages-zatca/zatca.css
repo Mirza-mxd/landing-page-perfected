@@ -263,7 +263,7 @@ section { position: relative; z-index: 1; }
   position: absolute;
   left: 0; right: 0; bottom: -6px;
   height: 4px;
-  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  background: linear-gradient(90deg, transparent, #36ABDB, transparent);
   border-radius: 2px;
 }
 
