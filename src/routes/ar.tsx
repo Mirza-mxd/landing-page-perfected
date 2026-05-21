@@ -1,15 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import css from "../pages-zatca/zatca.css?raw";
-import bodyHtml from "../pages-zatca/thank-you-body.html?raw";
+import bodyHtml from "../pages-zatca/zatca-body-ar.html?raw";
+import scriptSrc from "../pages-zatca/zatca-script.js?raw";
 
-export const Route = createFileRoute("/thank-you")({
+export const Route = createFileRoute("/ar")({
   head: () => ({
     meta: [
-      { title: "Thank you — ZATCA Phase 2 Checklist | Falcon Smart Solutions" },
+      { title: "قائمة التحقق من زاتكا المرحلة الثانية | Falcon Smart Solutions" },
       {
         name: "description",
         content:
-          "Your ZATCA Phase 2 checklist is downloading. Book a free 30-minute call with a Falcon consultant to map your fastest compliance path.",
+          "قائمة التحقق من 12 نقطة لجاهزية زاتكا المرحلة الثانية. الموجة 24 تبدأ في 30 يونيو 2026.",
       },
     ],
     links: [
@@ -21,10 +23,19 @@ export const Route = createFileRoute("/thank-you")({
       },
     ],
   }),
-  component: ThankYou,
+  component: IndexAr,
 });
 
-function ThankYou() {
+function IndexAr() {
+  useEffect(() => {
+    const s = document.createElement("script");
+    s.textContent = scriptSrc;
+    document.body.appendChild(s);
+    return () => {
+      document.body.removeChild(s);
+    };
+  }, []);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />

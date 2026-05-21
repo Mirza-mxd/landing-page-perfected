@@ -922,3 +922,54 @@ section { position: relative; z-index: 1; }
   .cd-unit .n { font-size: 22px; }
   .alert-bar { font-size: 10.5px; }
 }
+
+/* ============ LANG TOGGLE ============ */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.02);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lang-toggle .lang-opt {
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 2px 6px;
+  border-radius: 999px;
+  transition: color 160ms ease, background 160ms ease;
+}
+.lang-toggle .lang-opt:hover { color: var(--text); }
+.lang-toggle .lang-opt.active {
+  color: var(--text);
+  background: rgba(54, 171, 219, 0.14);
+}
+.lang-toggle .lang-sep { color: var(--text-soft); }
+
+/* ============ RTL / ARABIC ============ */
+[dir="rtl"] {
+  font-family: 'Tajawal', var(--body);
+}
+[dir="rtl"] .nav { flex-direction: row-reverse; }
+[dir="rtl"] .nav-right { flex-direction: row-reverse; }
+[dir="rtl"] .nav-meta .pulse-dot { margin-right: 0; margin-left: 6px; }
+[dir="rtl"] .hero-meta { direction: rtl; }
+[dir="rtl"] .btn-primary .arrow { display: inline-block; transform: scaleX(-1); }
+[dir="rtl"] .benefits-list li,
+[dir="rtl"] .qualify-list li { text-align: right; }
+[dir="rtl"] .footer-grid { direction: rtl; }
+[dir="rtl"] input,
+[dir="rtl"] select { text-align: right; }
+[dir="rtl"] .field-error { text-align: right; }
+[dir="rtl"] .hand-arrow,
+[dir="rtl"] .hand-note { display: none; }
