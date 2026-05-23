@@ -126,6 +126,10 @@ a:hover { color: var(--green-light); }
   0%   { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
+@keyframes scroll-marquee-rtl {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
 
 /* ============ CONTAINER ============ */
 .container {
@@ -999,3 +1003,6 @@ section { position: relative; z-index: 1; }
 }
 [dir="rtl"] .trust-line .sep { margin: 0 10px; }
 [dir="rtl"] .footer-contact .label { text-align: right; }
+[dir="rtl"] .alert-bar .track {
+  animation-name: scroll-marquee-rtl;
+}
