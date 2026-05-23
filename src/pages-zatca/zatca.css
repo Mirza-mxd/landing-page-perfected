@@ -975,6 +975,7 @@ section { position: relative; z-index: 1; }
 [dir="rtl"] input,
 [dir="rtl"] select { text-align: right; }
 [dir="rtl"] .field-error { text-align: right; }
+[dir="rtl"] .phone-group { flex-direction: row-reverse; }
 [dir="rtl"] .hand-arrow {
   left: auto;
   right: -190px;
