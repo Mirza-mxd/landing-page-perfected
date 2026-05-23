@@ -967,9 +967,18 @@ section { position: relative; z-index: 1; }
 [dir="rtl"] .btn-primary .arrow { display: inline-block; transform: scaleX(-1); }
 [dir="rtl"] .benefits-list li,
 [dir="rtl"] .qualify-list li { text-align: right; }
-[dir="rtl"] .footer-grid { direction: rtl; }
+[dir="rtl"] .footer-grid { flex-direction: column; align-items: center; }
 [dir="rtl"] input,
 [dir="rtl"] select { text-align: right; }
 [dir="rtl"] .field-error { text-align: right; }
 [dir="rtl"] .hand-arrow,
-[dir="rtl"] .hand-note { display: none; }
+[dir="rtl"] .hand-note { display: none !important; }
+[dir="rtl"] .arrow-with-cta {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+[dir="rtl"] .trust-line .sep { margin: 0 10px; }
+[dir="rtl"] .footer-contact .label { text-align: right; }
