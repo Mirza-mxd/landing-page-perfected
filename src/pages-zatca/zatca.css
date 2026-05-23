@@ -968,7 +968,7 @@ section { position: relative; z-index: 1; }
 [dir="rtl"] .nav-right { flex-direction: row-reverse; }
 [dir="rtl"] .nav-meta .pulse-dot { margin-right: 0; margin-left: 6px; }
 [dir="rtl"] .hero-meta { direction: rtl; }
-[dir="rtl"] .btn-primary .arrow { display: inline-block; transform: scaleX(-1); }
+
 [dir="rtl"] .benefits-list li,
 [dir="rtl"] .qualify-list li { text-align: right; }
 [dir="rtl"] .footer-grid { flex-direction: column; align-items: center; }
