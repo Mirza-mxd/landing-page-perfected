@@ -971,8 +971,25 @@ section { position: relative; z-index: 1; }
 [dir="rtl"] input,
 [dir="rtl"] select { text-align: right; }
 [dir="rtl"] .field-error { text-align: right; }
-[dir="rtl"] .hand-arrow,
-[dir="rtl"] .hand-note { display: none !important; }
+[dir="rtl"] .hand-arrow {
+  left: auto;
+  right: -190px;
+}
+[dir="rtl"] .hand-arrow.right {
+  left: auto;
+  right: -120px;
+  transform: scaleX(-1);
+}
+[dir="rtl"] .hand-note {
+  left: auto;
+  right: -240px;
+  transform: rotate(8deg);
+}
+[dir="rtl"] .hand-note.right {
+  left: auto;
+  right: -190px;
+  transform: rotate(8deg);
+}
 [dir="rtl"] .arrow-with-cta {
   display: inline-flex;
   flex-direction: row-reverse;
