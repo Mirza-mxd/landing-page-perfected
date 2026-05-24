@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import css from "../pages-zatca/zatca.css?raw";
 import bodyHtml from "../pages-zatca/thank-you-body-ar.html?raw";
 
-export const Route = createFileRoute("/ar/thank-you")({
+export const Route = createFileRoute("/ar_/thank-you")({
   head: () => ({
     meta: [
       { title: "شكراً لك — قائمة الامتثال لزاتكا المرحلة الثانية | Falcon Smart Solutions" },

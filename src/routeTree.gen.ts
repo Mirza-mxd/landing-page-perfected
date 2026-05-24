@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as ArRouteImport } from './routes/ar'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ArThankYouRouteImport } from './routes/ar.thank-you'
+import { Route as ArThankYouRouteImport } from './routes/ar_.thank-you'
 
 const ThankYouRoute = ThankYouRouteImport.update({
   id: '/thank-you',
@@ -30,42 +30,43 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArThankYouRoute = ArThankYouRouteImport.update({
-  id: '/thank-you',
-  path: '/thank-you',
-  getParentRoute: () => ArRoute,
+  id: '/ar_/thank-you',
+  path: '/ar/thank-you',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/ar': typeof ArRouteWithChildren
+  '/ar': typeof ArRoute
   '/thank-you': typeof ThankYouRoute
   '/ar/thank-you': typeof ArThankYouRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/ar': typeof ArRouteWithChildren
+  '/ar': typeof ArRoute
   '/thank-you': typeof ThankYouRoute
   '/ar/thank-you': typeof ArThankYouRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/ar': typeof ArRouteWithChildren
+  '/ar': typeof ArRoute
   '/thank-you': typeof ThankYouRoute
-  '/ar/thank-you': typeof ArThankYouRoute
+  '/ar_/thank-you': typeof ArThankYouRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/ar' | '/thank-you' | '/ar/thank-you'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/ar' | '/thank-you' | '/ar/thank-you'
-  id: '__root__' | '/' | '/ar' | '/thank-you' | '/ar/thank-you'
+  id: '__root__' | '/' | '/ar' | '/thank-you' | '/ar_/thank-you'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ArRoute: typeof ArRouteWithChildren
+  ArRoute: typeof ArRoute
   ThankYouRoute: typeof ThankYouRoute
+  ArThankYouRoute: typeof ArThankYouRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -91,31 +92,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ar/thank-you': {
-      id: '/ar/thank-you'
-      path: '/thank-you'
+    '/ar_/thank-you': {
+      id: '/ar_/thank-you'
+      path: '/ar/thank-you'
       fullPath: '/ar/thank-you'
       preLoaderRoute: typeof ArThankYouRouteImport
-      parentRoute: typeof ArRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface ArRouteChildren {
-  ArThankYouRoute: typeof ArThankYouRoute
-}
-
-const ArRouteChildren: ArRouteChildren = {
-  ArThankYouRoute: ArThankYouRoute,
-}
-
-const ArRouteWithChildren = ArRoute._addFileChildren(ArRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ArRoute: ArRouteWithChildren,
+  ArRoute: ArRoute,
   ThankYouRoute: ThankYouRoute,
+  ArThankYouRoute: ArThankYouRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
