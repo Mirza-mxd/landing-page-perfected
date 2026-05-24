@@ -80,8 +80,9 @@ async function submitForm(form) {
 
   /* Redirect to the matching language thank-you page ~1s after download starts */
   const thankYouPath = isArabic ? '/ar/thank-you' : '/thank-you';
+  const thankYouUrl = thankYouPath + '?email=' + encodeURIComponent(data.email);
   setTimeout(function () {
-    window.location.href = thankYouPath;
+    window.location.href = thankYouUrl;
   }, 1000);
 }
 
