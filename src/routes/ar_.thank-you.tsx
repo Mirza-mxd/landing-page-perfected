@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import css from "../pages-zatca/zatca.css?raw";
 import bodyHtml from "../pages-zatca/thank-you-body-ar.html?raw";
+import scriptSrc from "../pages-zatca/thank-you-script.js?raw";
 
 export const Route = createFileRoute("/ar_/thank-you")({
   head: () => ({
@@ -25,6 +27,15 @@ export const Route = createFileRoute("/ar_/thank-you")({
 });
 
 function ThankYouAr() {
+  useEffect(() => {
+    const s = document.createElement("script");
+    s.textContent = scriptSrc;
+    document.body.appendChild(s);
+    return () => {
+      document.body.removeChild(s);
+    };
+  }, []);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
