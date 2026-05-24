@@ -44,10 +44,16 @@
 async function submitForm(form) {
   const countryCode = form.querySelector('[name="country_code"]').value;
   const phoneDigits = form.querySelector('[name="phone"]').value.replace(/\D/g, '');
+
+  /* Detect language from current pathname */
+  const isArabic = window.location.pathname === '/ar' || window.location.pathname.startsWith('/ar/');
+  const language = isArabic ? 'ar' : 'en';
+
   const data = {
     name:  form.querySelector('[name="name"]').value.trim(),
     email: form.querySelector('[name="email"]').value.trim(),
     phone: countryCode + phoneDigits,
+    language: language,
     source: 'zatca-phase-2-checklist-landing',
     timestamp: new Date().toISOString()
   };
@@ -62,15 +68,15 @@ async function submitForm(form) {
 
   console.log('Lead captured (replace with backend call):', data);
 
-  /* Trigger download of both PDF checklists */
-  triggerDownload('/zatca-checklist-en.pdf', 'zatca-checklist-en.pdf');
-  setTimeout(function () {
-    triggerDownload('/zatca-checklist-ar.pdf', 'zatca-checklist-ar.pdf');
-  }, 300);
+  /* Download the matching language PDF only */
+  const pdfPath = isArabic ? '/zatca-checklist-ar.pdf' : '/zatca-checklist-en.pdf';
+  const pdfFilename = isArabic ? 'zatca-checklist-ar.pdf' : 'zatca-checklist-en.pdf';
+  triggerDownload(pdfPath, pdfFilename);
 
-  /* Redirect to thank-you page ~1s after downloads start */
+  /* Redirect to the matching language thank-you page ~1s after download starts */
+  const thankYouPath = isArabic ? '/ar/thank-you' : '/thank-you';
   setTimeout(function () {
-    window.location.href = '/thank-you';
+    window.location.href = thankYouPath;
   }, 1000);
 }
 
