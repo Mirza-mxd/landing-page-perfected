@@ -31,15 +31,7 @@
 })();
 
 /* ============================================================
-   2. FORM HANDLING. PLACEHOLDER, WIRE TO YOUR BACKEND HERE.
-   Replace the submitForm body with your preferred integration:
-   - Webflow form: remove this script, use Webflow's native form
-   - Mailchimp / Brevo / ConvertKit: POST to their endpoint
-   - n8n / Make / Zapier webhook: POST JSON to the webhook URL
-   - Custom backend: POST to your endpoint
-
-   After successful submission, redirect to the thank-you page
-   (step 3 in your funnel) for the call-booking flow.
+   2. FORM HANDLING. POSTS LEADS TO GOOGLE APPS SCRIPT.
    ============================================================ */
 async function submitForm(form) {
   const countryCode = form.querySelector('[name="country_code"]').value;
@@ -52,21 +44,34 @@ async function submitForm(form) {
   const data = {
     name:  form.querySelector('[name="name"]').value.trim(),
     email: form.querySelector('[name="email"]').value.trim(),
-    phone: countryCode + phoneDigits,
+    country_code: countryCode,
+    phone: phoneDigits,
     language: language,
     source: 'zatca-phase-2-checklist-landing',
+    user_agent: navigator.userAgent,
     timestamp: new Date().toISOString()
   };
 
-  /* ---- WIRE YOUR BACKEND HERE ----
-  await fetch('https://your-webhook-url.com/leads', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-  -------------------------------- */
+  /* Fire-and-forget POST to Google Apps Script endpoint.
+     Uses mode: 'no-cors' so the browser doesn't block on CORS preflight.
+     Content-type is text/plain because no-cors disallows application/json,
+     but the Apps Script reads the raw body and JSON-parses it server-side.
+     We deliberately do NOT await this — if it fails or is slow, the user
+     still gets their PDF and the redirect still happens. */
+  try {
+    fetch('https://script.google.com/macros/s/AKfycbwx3omHS0jEwO5dwkYhD8Pw4a_1m0PZHLdwkOE0GIByyoaOX2bGjxqqLkk-QA1ZCzkaCw/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data)
+    }).catch(function (err) {
+      console.error('Lead capture POST failed:', err);
+    });
+  } catch (err) {
+    console.error('Lead capture threw synchronously:', err);
+  }
 
-  console.log('Lead captured (replace with backend call):', data);
+  console.log('Lead captured:', data);
 
   /* Download the matching language PDF only */
   const pdfPath = isArabic ? '/zatca-checklist-ar.pdf' : '/zatca-checklist-en.pdf';
