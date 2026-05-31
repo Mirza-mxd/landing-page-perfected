@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Falcon ZATCA Phase 2: Assessment" },
+      { name: "description", content: "Build and customize landing pages with dynamic content, form submissions, and multilingual support." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Falcon ZATCA Phase 2: Assessment" },
+      { property: "og:description", content: "Build and customize landing pages with dynamic content, form submissions, and multilingual support." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Falcon ZATCA Phase 2: Assessment" },
+      { name: "twitter:description", content: "Build and customize landing pages with dynamic content, form submissions, and multilingual support." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6829f17a-9a74-4eb3-bfac-371307dcca78/id-preview-915789bf--08bce183-32e4-4374-aa68-78cc8a962737.lovable.app-1779621388827.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6829f17a-9a74-4eb3-bfac-371307dcca78/id-preview-915789bf--08bce183-32e4-4374-aa68-78cc8a962737.lovable.app-1779621388827.png" },
     ],
     links: [
       {
