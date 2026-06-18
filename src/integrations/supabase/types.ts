@@ -16,6 +16,8 @@ export type Database = {
     Tables: {
       leads: {
         Row: {
+          booked_call: boolean
+          booked_call_at: string | null
           country_code: string | null
           created_at: string
           email: string
@@ -28,6 +30,8 @@ export type Database = {
           user_agent: string | null
         }
         Insert: {
+          booked_call?: boolean
+          booked_call_at?: string | null
           country_code?: string | null
           created_at?: string
           email: string
@@ -40,6 +44,8 @@ export type Database = {
           user_agent?: string | null
         }
         Update: {
+          booked_call?: boolean
+          booked_call_at?: string | null
           country_code?: string | null
           created_at?: string
           email?: string
@@ -58,7 +64,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      mark_lead_booked: { Args: { _email: string }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never
