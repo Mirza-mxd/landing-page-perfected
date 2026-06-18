@@ -71,6 +71,36 @@ async function submitForm(form) {
     console.error('Lead capture threw synchronously:', err);
   }
 
+  /* Also save the lead to the Lovable Cloud database (fire-and-forget). */
+  try {
+    const SUPABASE_URL = 'https://uukxbzecfadegznckmql.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_qZ4uu3-HCC09Mi_QyGfM0g_bu4ph5pr';
+    fetch(SUPABASE_URL + '/rest/v1/leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        country_code: data.country_code,
+        phone: data.phone,
+        language: data.language,
+        source: data.source,
+        user_agent: data.user_agent,
+        submitted_at: data.timestamp
+      })
+    }).catch(function (err) {
+      console.error('Lead DB insert failed:', err);
+    });
+  } catch (err) {
+    console.error('Lead DB insert threw synchronously:', err);
+  }
+
+
   console.log('Lead captured:', data);
 
   /* Download the matching language PDF only */
