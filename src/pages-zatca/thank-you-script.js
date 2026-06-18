@@ -32,9 +32,29 @@
       } catch (err) {
         console.error('Mark-booked threw synchronously:', err);
       }
+
+      /* Also mark the lead as booked in the Lovable Cloud database. */
+      try {
+        const SUPABASE_URL = 'https://uukxbzecfadegznckmql.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_qZ4uu3-HCC09Mi_QyGfM0g_bu4ph5pr';
+        fetch(SUPABASE_URL + '/rest/v1/rpc/mark_lead_booked', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY
+          },
+          body: JSON.stringify({ _email: email })
+        }).catch(function (err) {
+          console.error('Mark-booked DB call failed:', err);
+        });
+      } catch (err) {
+        console.error('Mark-booked DB call threw synchronously:', err);
+      }
     } else {
       console.warn('No email in URL, lead cannot be matched to a row.');
     }
+
 
     /* Reveal the confirmation message and scroll to it smoothly */
     confirmBox.style.display = 'block';
